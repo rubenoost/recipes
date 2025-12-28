@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ block "title" . }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
 </head>
 <body>
   <header class="site-header">
     <nav>
-      <a href="/" class="logo">{{ site.Title }}</a>
+      <a href="{{ "" | relURL }}" class="logo">{{ site.Title }}</a>
       <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/recipes/">Recipes</a></li>
+        <li><a href="{{ "" | relURL }}">Home</a></li>
+        <li><a href="{{ "recipes/" | relURL }}">Recipes</a></li>
       </ul>
     </nav>
   </header>
