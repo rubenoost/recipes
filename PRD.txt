@@ -35,13 +35,13 @@ Recepten
 - Stapsgewijze bereidingsinstructies
 - Optionele notities/tips
 - Optionele afbeelding
-- Categorieën (bijv. ontbijt, hoofdgerecht, dessert)
-- Tags voor filtering (bijv. vegetarisch, snel, kindvriendelijk)
+- Tags voor classificatie (bijv. ontbijt, hoofdgerecht, vegetarisch, snel)
 
 Navigatie
 - Homepage met laatste recepten
 - Overzichtspagina met alle recepten
-- Navigatie via categorieën en tags
+- Tags overzicht met alle tags en aantal recepten per tag
+- Individuele tag pagina's met gefilterde recepten
 
 Taal
 - Volledig Nederlandstalig
@@ -71,8 +71,7 @@ Recept bestandsformaat: Markdown met YAML front matter
   servings: 4
   prep_time: "15 minuten"
   cook_time: "30 minuten"
-  categories: ["hoofdgerecht"]
-  tags: ["vegetarisch", "snel"]
+  tags: ["hoofdgerecht", "vegetarisch", "snel"]
   ingredients:
     - item: "ingrediënt"
       amount: "hoeveelheid"
