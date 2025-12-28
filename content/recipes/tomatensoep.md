@@ -7,8 +7,7 @@ image: ""
 servings: 6
 prep_time: "20 minuten"
 cook_time: "40 minuten"
-categories: ["voorgerecht", "soep"]
-tags: ["comfort food", "hollands", "kindvriendelijk"]
+tags: ["voorgerecht", "soep", "comfort food", "hollands", "kindvriendelijk"]
 ingredients:
   - item: "gepelde tomaten (blik)"
     amount: "2 blikken (800 gram)"

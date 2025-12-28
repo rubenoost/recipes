@@ -7,8 +7,7 @@ image: ""
 servings: 4
 prep_time: "10 minuten"
 cook_time: "15 minuten"
-categories: ["ontbijt"]
-tags: ["snel", "vegetarisch", "kindvriendelijk"]
+tags: ["ontbijt", "snel", "vegetarisch", "kindvriendelijk"]
 ingredients:
   - item: "bloem"
     amount: "200 gram"

@@ -7,8 +7,7 @@ image: ""
 servings: 4
 prep_time: "10 minuten"
 cook_time: "20 minuten"
-categories: ["hoofdgerecht"]
-tags: ["pasta", "italiaans", "snel"]
+tags: ["hoofdgerecht", "pasta", "italiaans", "snel"]
 ingredients:
   - item: "spaghetti"
     amount: "400 gram"

@@ -1,0 +1,13 @@
+{{ define "main" }}
+<div class="container">
+  <h1>Tags</h1>
+
+  <div class="tags-cloud">
+    {{ range .Pages }}
+    <a href="{{ .RelPermalink }}" class="tag-large">
+      {{ .Title }} <span class="tag-count">({{ len .Pages }})</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

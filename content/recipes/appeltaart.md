@@ -7,8 +7,7 @@ image: ""
 servings: 10
 prep_time: "30 minuten"
 cook_time: "60 minuten"
-categories: ["dessert", "gebak"]
-tags: ["hollands", "feestelijk", "bakken"]
+tags: ["dessert", "gebak", "hollands", "feestelijk", "bakken"]
 ingredients:
   - item: "bloem"
     amount: "300 gram"
