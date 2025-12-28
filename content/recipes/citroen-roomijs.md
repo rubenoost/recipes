@@ -1,6 +1,6 @@
 ---
 title: "Citroen Roomijs"
-date: 2024-12-28
+date: 2025-12-28
 draft: false
 description: "Fris zelfgemaakt roomijs met verse citroen"
 image: ""

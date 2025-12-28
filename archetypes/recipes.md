@@ -10,8 +10,14 @@ cook_time: "30 minuten"
 tags: []
 source: ""
 ingredients:
+  # Simpele lijst:
   - item: ""
     amount: ""
+  # Of gegroepeerd:
+  # - group: "Groepnaam"
+  #   items:
+  #     - item: ""
+  #       amount: ""
 instructions:
   - step: ""
 ---

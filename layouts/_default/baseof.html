@@ -6,8 +6,26 @@
   <title>{{ block "title" . }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
   <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:site_name" content="{{ site.Title }}">
+  {{ with .Params.image }}<meta property="og:image" content="{{ . | absURL }}">{{ end }}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary{{ with .Params.image }}_large_image{{ end }}">
+  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  {{ with .Params.image }}<meta name="twitter:image" content="{{ . | absURL }}">{{ end }}
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
 </head>
-<body>
+<body data-search-index="{{ "index.json" | relURL }}">
   <header class="site-header">
     <nav>
       <a href="{{ "" | relURL }}" class="logo">{{ site.Title }}</a>
@@ -16,6 +34,10 @@
         <li><a href="{{ "recipes/" | relURL }}">Recepten</a></li>
         <li><a href="{{ "tags/" | relURL }}">Tags</a></li>
       </ul>
+      <button class="theme-toggle" aria-label="Thema wisselen">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <button class="search-toggle" aria-label="Zoeken">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </button>
@@ -35,80 +57,28 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
-  <script>
-  (function() {
-    const toggle = document.querySelector('.search-toggle');
-    const overlay = document.getElementById('search-overlay');
-    const closeBtn = document.querySelector('.search-close');
-    const input = document.getElementById('search-input');
-    const results = document.getElementById('search-results');
-    let fuse = null;
-
-    fetch('{{ "index.json" | relURL }}')
-      .then(res => res.json())
-      .then(data => {
-        fuse = new Fuse(data, {
-          keys: [
-            { name: 'title', weight: 2 },
-            { name: 'description', weight: 1.5 },
-            { name: 'ingredients', weight: 1 },
-            { name: 'tags', weight: 1 }
-          ],
-          threshold: 0.3
-        });
-      });
-
-    function openSearch() {
-      overlay.classList.add('active');
-      input.focus();
-    }
-
-    function closeSearch() {
-      overlay.classList.remove('active');
-      input.value = '';
-      results.innerHTML = '';
-    }
-
-    toggle.addEventListener('click', openSearch);
-    closeBtn.addEventListener('click', closeSearch);
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeSearch();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeSearch();
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        openSearch();
-      }
-    });
-
-    input.addEventListener('input', function() {
-      const query = this.value.trim();
-      if (!query || !fuse) {
-        results.innerHTML = '<p class="search-hint">Zoek op recept, ingrediënt of tag</p>';
-        return;
-      }
-      const matches = fuse.search(query).slice(0, 8);
-      if (matches.length === 0) {
-        results.innerHTML = '<p class="search-empty">Geen recepten gevonden</p>';
-      } else {
-        results.innerHTML = matches.map(r =>
-          `<a href="${r.item.url}" class="search-result">
-            <span class="search-result-title">${r.item.title}</span>
-            ${r.item.description ? `<span class="search-result-desc">${r.item.description}</span>` : ''}
-          </a>`
-        ).join('');
-      }
-    });
-  })();
-  </script>
+  <script src="{{ "js/main.js" | relURL }}"></script>
 
   <main>
     {{ block "main" . }}{{ end }}
   </main>
 
   <footer class="site-footer">
-    <p>&copy; {{ now.Year }} {{ site.Title }}</p>
+    <div class="footer-content">
+      <div class="footer-about">
+        <p class="footer-title">{{ site.Title }}</p>
+        <p class="footer-description">{{ site.Params.description }}</p>
+      </div>
+      <div class="footer-links">
+        <p class="footer-heading">Snel naar</p>
+        <ul>
+          <li><a href="{{ "recipes/" | relURL }}">Alle recepten</a></li>
+          <li><a href="{{ "tags/" | relURL }}">Tags</a></li>
+          <li><a href="{{ "index.xml" | relURL }}">RSS feed</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-copyright">&copy; {{ now.Year }} {{ site.Title }}</p>
   </footer>
 </body>
 </html>

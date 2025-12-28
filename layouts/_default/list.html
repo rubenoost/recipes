@@ -4,19 +4,7 @@
 
   <div class="recipe-grid">
     {{ range .Pages }}
-    <article class="recipe-card">
-      {{ with .Params.image }}
-      <img src="{{ . }}" alt="{{ $.Title }}" class="recipe-image">
-      {{ end }}
-      <div class="recipe-card-content">
-        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-        <p class="recipe-meta">
-          {{ with .Params.prep_time }}<span>Voorbereiding: {{ . }}</span>{{ end }}
-          {{ with .Params.cook_time }}<span>Bereiden: {{ . }}</span>{{ end }}
-        </p>
-        {{ with .Description }}<p>{{ . }}</p>{{ end }}
-      </div>
-    </article>
+    {{ partial "recipe-card.html" . }}
     {{ end }}
   </div>
 </div>

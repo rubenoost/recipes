@@ -18,11 +18,24 @@
   <div class="recipe-body">
     <section class="ingredients">
       <h2>Ingrediënten</h2>
-      <ul>
+      {{ if (index .Params.ingredients 0).group }}
+        {{/* Gegroepeerde ingrediënten */}}
         {{ range .Params.ingredients }}
-        <li><strong>{{ .amount }}</strong> {{ .item }}</li>
+        <h3>{{ .group }}</h3>
+        <ul>
+          {{ range .items }}
+          <li><strong>{{ .amount }}</strong> {{ .item }}</li>
+          {{ end }}
+        </ul>
         {{ end }}
-      </ul>
+      {{ else }}
+        {{/* Platte lijst */}}
+        <ul>
+          {{ range .Params.ingredients }}
+          <li><strong>{{ .amount }}</strong> {{ .item }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
     </section>
 
     <section class="instructions">
@@ -55,4 +68,38 @@
   <p class="recipe-source"><strong>Bron:</strong> <a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></p>
   {{ end }}
 </article>
+
+{{- $ingredients := slice }}
+{{- if (index .Params.ingredients 0).group }}
+  {{- range .Params.ingredients }}
+    {{- range .items }}
+      {{- $ingredients = $ingredients | append (printf "%s %s" .amount .item) }}
+    {{- end }}
+  {{- end }}
+{{- else }}
+  {{- range .Params.ingredients }}
+    {{- $ingredients = $ingredients | append (printf "%s %s" .amount .item) }}
+  {{- end }}
+{{- end }}
+{{- $instructions := slice }}
+{{- range .Params.instructions }}
+  {{- $instructions = $instructions | append (dict "text" .step) }}
+{{- end }}
+{{- $schema := dict
+  "@context" "https://schema.org/"
+  "@type" "Recipe"
+  "name" .Title
+  "description" .Description
+  "author" (dict "@type" "Organization" "name" site.Title)
+  "datePublished" (.Date.Format "2006-01-02")
+  "recipeIngredient" $ingredients
+  "recipeInstructions" $instructions
+}}
+{{- with .Params.image }}{{ $schema = merge $schema (dict "image" (. | absURL)) }}{{ end }}
+{{- with .Params.servings }}{{ $schema = merge $schema (dict "recipeYield" (printf "%d porties" .)) }}{{ end }}
+{{- with .Params.prep_time }}{{ $schema = merge $schema (dict "prepTime" (printf "PT%s" (replace (replace . " minuten" "M") " uur" "H"))) }}{{ end }}
+{{- with .Params.cook_time }}{{ $schema = merge $schema (dict "cookTime" (printf "PT%s" (replace (replace . " minuten" "M") " uur" "H"))) }}{{ end }}
+<script type="application/ld+json">
+{{ $schema | jsonify (dict "indent" "  ") | safeJS }}
+</script>
 {{ end }}

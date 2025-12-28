@@ -1,0 +1,16 @@
+{{ define "title" }}Pagina niet gevonden | {{ site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="container error-page">
+  <h1>404</h1>
+  <p class="error-message">Oeps! Deze pagina bestaat niet (meer).</p>
+  <p>Misschien is het recept verplaatst of verwijderd.</p>
+
+  <div class="error-actions">
+    <a href="{{ "" | relURL }}" class="btn">Naar home</a>
+    <a href="{{ "recipes/" | relURL }}" class="btn btn-outline">Alle recepten</a>
+  </div>
+
+  <p class="error-hint">Tip: Gebruik <kbd>Ctrl</kbd>+<kbd>K</kbd> om te zoeken</p>
+</div>
+{{ end }}
