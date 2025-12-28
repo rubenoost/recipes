@@ -11,7 +11,7 @@
       <div class="recipe-card-content">
         <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
         <p class="recipe-meta">
-          {{ with .Params.prep_time }}<span>Voorbereiden: {{ . }}</span>{{ end }}
+          {{ with .Params.prep_time }}<span>Voorbereiding: {{ . }}</span>{{ end }}
           {{ with .Params.cook_time }}<span>Bereiden: {{ . }}</span>{{ end }}
         </p>
         {{ with .Description }}<p>{{ . }}</p>{{ end }}

@@ -1,4 +1,4 @@
-baseURL = 'https://rubenoost.github.io/recipes/'
+baseURL = 'https://recepten.oost.io/'
 languageCode = 'nl'
 title = 'Kookboek Familie Oost'
 
@@ -7,6 +7,9 @@ title = 'Kookboek Familie Oost'
 
 [taxonomies]
   tag = 'tags'
+
+[outputs]
+  home = ["HTML", "JSON"]
 
 [markup]
   [markup.goldmark]

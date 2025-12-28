@@ -5,7 +5,7 @@
     {{ with .Description }}<p class="recipe-description">{{ . }}</p>{{ end }}
 
     <div class="recipe-meta-bar">
-      {{ with .Params.prep_time }}<span class="meta-item">Voorbereiden: {{ . }}</span>{{ end }}
+      {{ with .Params.prep_time }}<span class="meta-item">Voorbereiding: {{ . }}</span>{{ end }}
       {{ with .Params.cook_time }}<span class="meta-item">Bereiden: {{ . }}</span>{{ end }}
       {{ with .Params.servings }}<span class="meta-item">Porties: {{ . }}</span>{{ end }}
     </div>
@@ -49,6 +49,10 @@
     <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
     {{ end }}
   </footer>
+  {{ end }}
+
+  {{ with .Params.source }}
+  <p class="recipe-source"><strong>Bron:</strong> <a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></p>
   {{ end }}
 </article>
 {{ end }}

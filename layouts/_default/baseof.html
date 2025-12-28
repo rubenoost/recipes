@@ -16,8 +16,92 @@
         <li><a href="{{ "recipes/" | relURL }}">Recepten</a></li>
         <li><a href="{{ "tags/" | relURL }}">Tags</a></li>
       </ul>
+      <button class="search-toggle" aria-label="Zoeken">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
     </nav>
   </header>
+
+  <div class="search-overlay" id="search-overlay">
+    <div class="search-modal">
+      <div class="search-header">
+        <input type="text" id="search-input" placeholder="Zoek een recept...">
+        <button class="search-close" aria-label="Sluiten">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0"></script>
+  <script>
+  (function() {
+    const toggle = document.querySelector('.search-toggle');
+    const overlay = document.getElementById('search-overlay');
+    const closeBtn = document.querySelector('.search-close');
+    const input = document.getElementById('search-input');
+    const results = document.getElementById('search-results');
+    let fuse = null;
+
+    fetch('{{ "index.json" | relURL }}')
+      .then(res => res.json())
+      .then(data => {
+        fuse = new Fuse(data, {
+          keys: [
+            { name: 'title', weight: 2 },
+            { name: 'description', weight: 1.5 },
+            { name: 'ingredients', weight: 1 },
+            { name: 'tags', weight: 1 }
+          ],
+          threshold: 0.3
+        });
+      });
+
+    function openSearch() {
+      overlay.classList.add('active');
+      input.focus();
+    }
+
+    function closeSearch() {
+      overlay.classList.remove('active');
+      input.value = '';
+      results.innerHTML = '';
+    }
+
+    toggle.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeSearch();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSearch();
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openSearch();
+      }
+    });
+
+    input.addEventListener('input', function() {
+      const query = this.value.trim();
+      if (!query || !fuse) {
+        results.innerHTML = '<p class="search-hint">Zoek op recept, ingrediënt of tag</p>';
+        return;
+      }
+      const matches = fuse.search(query).slice(0, 8);
+      if (matches.length === 0) {
+        results.innerHTML = '<p class="search-empty">Geen recepten gevonden</p>';
+      } else {
+        results.innerHTML = matches.map(r =>
+          `<a href="${r.item.url}" class="search-result">
+            <span class="search-result-title">${r.item.title}</span>
+            ${r.item.description ? `<span class="search-result-desc">${r.item.description}</span>` : ''}
+          </a>`
+        ).join('');
+      }
+    });
+  })();
+  </script>
 
   <main>
     {{ block "main" . }}{{ end }}
