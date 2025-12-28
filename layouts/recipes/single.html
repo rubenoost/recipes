@@ -5,9 +5,9 @@
     {{ with .Description }}<p class="recipe-description">{{ . }}</p>{{ end }}
 
     <div class="recipe-meta-bar">
-      {{ with .Params.prep_time }}<span class="meta-item">Prep: {{ . }}</span>{{ end }}
-      {{ with .Params.cook_time }}<span class="meta-item">Cook: {{ . }}</span>{{ end }}
-      {{ with .Params.servings }}<span class="meta-item">Servings: {{ . }}</span>{{ end }}
+      {{ with .Params.prep_time }}<span class="meta-item">Voorbereiden: {{ . }}</span>{{ end }}
+      {{ with .Params.cook_time }}<span class="meta-item">Bereiden: {{ . }}</span>{{ end }}
+      {{ with .Params.servings }}<span class="meta-item">Porties: {{ . }}</span>{{ end }}
     </div>
   </header>
 
@@ -17,7 +17,7 @@
 
   <div class="recipe-body">
     <section class="ingredients">
-      <h2>Ingredients</h2>
+      <h2>Ingrediënten</h2>
       <ul>
         {{ range .Params.ingredients }}
         <li><strong>{{ .amount }}</strong> {{ .item }}</li>
@@ -26,7 +26,7 @@
     </section>
 
     <section class="instructions">
-      <h2>Instructions</h2>
+      <h2>Bereiding</h2>
       <ol>
         {{ range .Params.instructions }}
         <li>{{ .step }}</li>
@@ -36,7 +36,7 @@
 
     {{ with .Content }}
     <section class="recipe-notes">
-      <h2>Notes</h2>
+      <h2>Notities</h2>
       {{ . }}
     </section>
     {{ end }}
@@ -46,7 +46,7 @@
   <footer class="recipe-tags">
     <strong>Tags:</strong>
     {{ range . }}
-    <a href="/tags/{{ . | urlize }}/" class="tag">{{ . }}</a>
+    <a href="{{ "tags/" | relURL }}{{ . | urlize }}/" class="tag">{{ . }}</a>
     {{ end }}
   </footer>
   {{ end }}

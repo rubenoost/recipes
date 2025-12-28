@@ -1,9 +1,9 @@
 baseURL = 'https://rubenoost.github.io/recipes/'
-languageCode = 'en-us'
-title = 'My Recipes'
+languageCode = 'nl'
+title = 'Kookboek Familie Oost'
 
 [params]
-  description = 'A personal collection of favorite recipes'
+  description = 'Onze favoriete recepten verzameld'
 
 [taxonomies]
   tag = 'tags'

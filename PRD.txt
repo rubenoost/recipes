@@ -1,0 +1,115 @@
+Kookboek Familie Oost - Product Requirements Document
+=====================================================
+
+Overzicht
+---------
+Een persoonlijke receptenwebsite voor de familie Oost, gebouwd met Hugo en
+gehost op GitHub Pages. De site dient als centraal punt voor het verzamelen,
+opslaan en delen van familierecepten.
+
+URL: https://rubenoost.github.io/recipes/
+
+
+Doelstellingen
+--------------
+1. Recepten verzamelen op één centrale plek
+2. Makkelijk toegankelijk op mobiele apparaten
+3. Eenvoudig delen van recepten met anderen
+4. Simpel te onderhouden zonder technische kennis na initiële setup
+
+
+Doelgroep
+---------
+- Primair: Familie Oost
+- Secundair: Vrienden en kennissen waarmee recepten gedeeld worden
+
+
+Functionele Eisen
+-----------------
+
+Recepten
+- Titel en beschrijving
+- Voorbereidingstijd en bereidingstijd
+- Aantal porties
+- Ingrediëntenlijst met hoeveelheden
+- Stapsgewijze bereidingsinstructies
+- Optionele notities/tips
+- Optionele afbeelding
+- Categorieën (bijv. ontbijt, hoofdgerecht, dessert)
+- Tags voor filtering (bijv. vegetarisch, snel, kindvriendelijk)
+
+Navigatie
+- Homepage met laatste recepten
+- Overzichtspagina met alle recepten
+- Navigatie via categorieën en tags
+
+Taal
+- Volledig Nederlandstalig
+- Geen meertaligheid nodig
+
+
+Technische Specificaties
+------------------------
+
+Framework: Hugo (static site generator)
+Hosting: GitHub Pages
+Deployment: Automatisch via GitHub Actions bij push naar main
+
+Structuur:
+  /archetypes/recipes.md    - Template voor nieuwe recepten
+  /content/recipes/         - Recepten in Markdown formaat
+  /layouts/                 - HTML templates
+  /static/css/              - Styling
+
+Recept bestandsformaat: Markdown met YAML front matter
+  ---
+  title: "Naam van het recept"
+  date: 2024-12-28
+  draft: false
+  description: "Korte beschrijving"
+  image: "/images/recept.jpg"
+  servings: 4
+  prep_time: "15 minuten"
+  cook_time: "30 minuten"
+  categories: ["hoofdgerecht"]
+  tags: ["vegetarisch", "snel"]
+  ingredients:
+    - item: "ingrediënt"
+      amount: "hoeveelheid"
+  instructions:
+    - step: "Stap beschrijving"
+  ---
+
+  Optionele notities hier.
+
+
+Design Principes
+----------------
+- Mobile-first responsive design
+- Schone, leesbare typografie
+- Snelle laadtijden (statische site)
+- Geen JavaScript vereist voor basisfunctionaliteit
+
+
+Workflow
+--------
+
+Nieuw recept toevoegen:
+1. hugo new recipes/naam-van-recept.md
+2. Vul de front matter in met ingrediënten en bereiding
+3. Optioneel: voeg afbeelding toe aan /static/images/
+4. Zet draft: false
+5. Commit en push naar main
+6. GitHub Actions bouwt en deployt automatisch
+
+Lokaal testen:
+  hugo server -D
+
+
+Toekomstige Mogelijkheden
+-------------------------
+- Zoekfunctionaliteit
+- Printervriendelijke weergave
+- Receptafbeeldingen
+- Portiescalculator
+- Favorieten markeren
