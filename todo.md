@@ -1,32 +1,19 @@
-# Todo: Verbeteringen Receptensite
+# UI Improvements
 
-## Hoge prioriteit
+## High Impact
+- [x] Placeholder images - Recipe cards without images look empty. Add a default food illustration
+- [ ] Ingredient checkboxes - Let users check off ingredients while cooking
+- [ ] Sticky ingredients sidebar - Keep ingredients visible while scrolling through instructions
+- [x] Active nav state - Highlight current page in navigation
 
-- [ ] Afbeeldingen toevoegen aan alle recepten
-- [x] Open Graph meta tags toevoegen voor social sharing
-- [x] JSON-LD Recipe schema toevoegen voor Google rich snippets
-- [ ] Toegankelijkheid verbeteren
-  - [ ] Visible focus indicators in CSS
-  - [ ] Skip-to-content link
-  - [ ] Label toevoegen aan zoek-input
+## Nice to Have
+- [ ] Recipe card tags - Show 1-2 tags on cards for quick filtering context
+- [ ] Print button - Print styles exist, but no visible button to trigger printing
+- [ ] Servings adjuster - Scale ingredient amounts dynamically
+- [ ] Skip to content link - Accessibility improvement
+- [ ] Back to top button - Helpful on longer recipes
 
-## Medium prioriteit
-
-- [x] Print stylesheet toevoegen
-- [x] 404 pagina maken
-- [ ] Breadcrumb navigatie toevoegen
-- [ ] Gerelateerde recepten sectie op receptpagina
-- [ ] Prev/next navigatie tussen recepten
-- [ ] Zoekfunctie verbeteren
-  - [ ] Meer dan 8 resultaten tonen
-  - [ ] Filtering op tags
-
-## Lage prioriteit
-
-- [x] Dark mode ondersteuning (prefers-color-scheme + toggle)
-- [ ] Responsive images met srcset/WebP
-- [ ] Recipe scaling calculator (porties aanpassen)
-- [ ] Tag cloud met gewogen groottes
-- [x] Footer uitbreiden met meer info
-- [x] Inline JavaScript naar apart bestand verplaatsen
-- [x] Template duplicatie oplossen (list.html / term.html)
+## Polish
+- [ ] Better focus states - More visible keyboard navigation
+- [ ] Breadcrumbs - "Home > Recepten > [Recipe name]"
+- [x] Mobile hamburger menu - Nav wrapping on mobile isn't ideal

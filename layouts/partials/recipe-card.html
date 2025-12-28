@@ -1,6 +1,8 @@
 <article class="recipe-card">
   {{ with .Params.image }}
   <img src="{{ . }}" alt="{{ $.Title }}" class="recipe-image">
+  {{ else }}
+  <img src="{{ "images/placeholder.svg" | relURL }}" alt="{{ .Title }}" class="recipe-image recipe-placeholder">
   {{ end }}
   <div class="recipe-card-content">
     <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
